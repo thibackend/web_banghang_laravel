@@ -3,11 +3,13 @@
 <div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
-				<h6 class="inner-title">Sản phẩm</h6>
+            @foreach($l_sanpham as $lsp)
+				<h6 class="inner-title">Sản phẩm {{$lsp->name}}</h6>
+            @endforeach
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Home</a> / <span>Sản phẩm</span>
+					<a href="{{url('/page')}}">Home</a> / <span>Loại Sản phẩm</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -20,36 +22,16 @@
             <div class="row">
                 <div class="col-sm-3">
                     <ul class="aside-menu">
-                        <li><a href="#">Typography</a></li>
-                        <li><a href="#">Buttons</a></li>
-                        <li><a href="#">Dividers</a></li>
-                        <li><a href="#">Columns</a></li>
-                        <li><a href="#">Icon box</a></li>
-                        <li><a href="#">Notifications</a></li>
-                        <li><a href="#">Progress bars and Skill meter</a></li>
-                        <li><a href="#">Tabs</a></li>
-                        <li><a href="#">Testimonial</a></li>
-                        <li><a href="#">Video</a></li>
-                        <li><a href="#">Social icons</a></li>
-                        <li><a href="#">Carousel sliders</a></li>
-                        <li><a href="#">Custom List</a></li>
-                        <li><a href="#">Image frames &amp; gallery</a></li>
-                        <li><a href="#">Google Maps</a></li>
-                        <li><a href="#">Accordion and Toggles</a></li>
-                        <li class="is-active"><a href="#">Custom callout box</a></li>
-                        <li><a href="#">Page section</a></li>
-                        <li><a href="#">Mini callout box</a></li>
-                        <li><a href="#">Content box</a></li>
-                        <li><a href="#">Computer sliders</a></li>
-                        <li><a href="#">Pricing &amp; Data tables</a></li>
-                        <li><a href="#">Process Builders</a></li>
+                    @foreach($loai as $l) 
+                        <li><a href="{{url('/loaisanpham',$l->id)}}">{{$l->name}}</a></li>
+                    @endforeach
                     </ul>
                 </div>
                 <div class="col-sm-9">
                     <div class="beta-products-list">
                         <h4>New Products</h4>
                         <div class="beta-products-details">
-                            <p class="pull-left">438 styles found</p>
+                            <p class="pull-left">Tìm thấy {{count($sp_theoloai)}}</p>
                             <div class="clearfix"></div>
                         </div>
 
@@ -57,8 +39,11 @@
                             @foreach($sp_theoloai as $sp)
                                 <div class="col-sm-4">
                                     <div class="single-item">
+                                        @if ($sp->promotion_price != 0)
+                                            <div class="ribbon-wraper"><div class="ribbon sale">I love you</div></div>
+                                        @endif
                                         <div class="single-item-header">
-                                            <a href="product.html"><img src="source/image/product/{{ $sp->image }}" alt=""></a>
+                                            <a href="product.html"><img src="/source/image/product/{{$sp->image}}" alt="" height="256px" ></a>
                                         </div>
                                         <div class="single-item-body">
                                             <p class="single-item-title">{{$sp->name}}</p>
@@ -67,7 +52,7 @@
                                                 <span class="flash-del">{{number_format($sp->unit_price)}} đồng</span>
                                                 <span class="flash-sale">{{number_format($sp->promotion_price)}} đồng</span>
                                             @else
-                                            <span>{{number_format($sp->unit_price)}} đồng</span>
+                                                <span>{{number_format($sp->unit_price)}} đồng</span>
                                             @endif
                                             </p>
                                         </div>
@@ -85,22 +70,30 @@
                     <div class="space50">&nbsp;</div>
 
                     <div class="beta-products-list">
-                        <h4>Top Products</h4>
+                        <h4>Sản Phẩm Khác</h4>
                         <div class="beta-products-details">
-                            <p class="pull-left">438 styles found</p>
+                            <p class="pull-left">Tìm thấy {{count($sp_khac)}}</p>
                             <div class="clearfix"></div>
                         </div>
                         <div class="row">
-        
+                            @foreach($sp_khac as $spk)
                                 <div class="col-sm-4">
                                     <div class="single-item">
+                                    @if($spk->promotion_price != 0)
+                                        <div class="ribbon-wraper"><div class="ribbon sale">I love you</div></div>
+                                    @endif
                                         <div class="single-item-header">
-                                            <a href="product.html"><img src="source/assets/dest/images/products/1.jpg" alt=""></a>
+                                            <a href="product.html"><img src="/source/image/product/{{$spk->image}}" alt="" height="256px"></a>
                                         </div>
                                         <div class="single-item-body">
-                                            <p class="single-item-title">Sample Woman Top</p>
-                                            <p class="single-item-price">
-                                                <span>$34.55</span>
+                                            <p class="single-item-title">{{$spk->name}}</p>
+                                            <p class="single-item-price" style="font-size: 18px;">
+                                            @if($spk->promotion_price != 0)
+                                                <span class="flash-del">{{number_format($spk->unit_price)}} đồng</span>
+                                                <span class="flash-sale">{{number_format($spk->promotion_price)}} đồng</span>
+                                            @else
+                                                <span>{{number_format($spk->unit_price)}} đồng</span>
+                                            @endif
                                             </p>
                                         </div>
                                         <div class="single-item-caption">
@@ -110,7 +103,7 @@
                                         </div>
                                     </div>
                                 </div>
-                    
+                            @endforeach
                         </div>
                         <div class="space40">&nbsp;</div>
                         
