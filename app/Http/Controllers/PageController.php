@@ -102,13 +102,12 @@ class PageController extends Controller
         $product->id_type = $request->editType;
         $product->save();
         return $this->getIndexAdmin();
-        }
-        public function postAdminDelete($id)
-        {
-        $product = Product::find($id);
-        $product->delete();
-        return $this->getIndexAdmin();  
-        }
-
+    }
+    public function postAdminDelete($id)
+    {
+      $product = Product::find($id);
+      $product->delete();
+      return $this->getIndexAdmin();  
+    }
    
 }
