@@ -14,6 +14,8 @@
 	<link rel="stylesheet" title="style" href="{{URL::to('source/assets/dest/css/style.css')}}">
 	<link rel="stylesheet" href="{{URL::to('source/assets/dest/css/animate.css')}}">
 	<link rel="stylesheet" title="style" href="{{URL::to('source/assets/dest/css/huong-style.css') }}">
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 

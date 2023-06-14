@@ -57,8 +57,8 @@
                                             </p>
                                         </div>
                                         <div class="single-item-caption">
-                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="add-to-cart pull-left" href="add-to-cart/{{$sp->id}}"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="chitietsanpham/{{$sp->id}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
@@ -97,8 +97,8 @@
                                             </p>
                                         </div>
                                         <div class="single-item-caption">
-                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="add-to-cart pull-left" href="add-to-cart/{{$spk->id}}"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="chitietsanpham/{{$spk->id}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
