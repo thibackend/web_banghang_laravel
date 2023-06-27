@@ -59,7 +59,11 @@
 										
 								<div class="center">		
 									<div class="space10">&nbsp;</div>	
-									<a href="check-out" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>	
+                                     <form action="{{url('vnp_payment')}}" method="POST">
+														@csrf
+														<button type="submit" class="btn btn-default check_out" name="redirect">Thanh toán VNPAY</button>
+														<div class="payment_box payment_method_vnpay"style="display: none;">Pay via VnPay; you can pay with your credit card if youdon’t have a VnPay account</div>
+													</form>
 								</div>		
 							</div>			
 						</div>				

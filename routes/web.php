@@ -78,7 +78,10 @@ Route::post('/register',[App\Http\Controllers\UserController::class,'Register'])
 Route::get('add-to-cart/{id}',[App\Http\Controllers\PageController::class,'getAddToCart'])->name('themgiohang');
 Route::get('del-cart/{id}',[App\Http\Controllers\PageController::class,'getDelItemCart'])->name('xoagiohang');
 
-//-------------------------------------CHAECKOUT----------------------------------------------------//
+//-------------------------------------CHECKOUT----------------------------------------------------//
 Route::get('check-out',[App\Http\Controllers\PageController::class,'getCheckout'])->name('dathang');
 Route::post('check-out',[App\Http\Controllers\PageController::class,'postCheckout'])->name('dathang');
+
+//------------------------------Cổng thanh toán VNPAY-----------------------------------------------//
+Route::post('/vnp_payment',[App\Http\Controllers\PageController::class,'vnp_payment']);
 

@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('header',function ($view) {
-            if(Session('cart')){
+            if(Session('cart')){ // Nếu tồn tại Session Cart thì thực thi lệnh dưới
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
                 $view->with(['cart' => Session::get('cart'),

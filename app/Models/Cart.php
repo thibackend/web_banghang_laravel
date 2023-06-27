@@ -54,11 +54,11 @@ class Cart extends Model
             $this->totalPrice += $item->promotion_price * $giohang['qty'];
         }
     }
-     //xóa 1                                 
+     //xóa số lượng item                               
     public function reduceByOne($id)
     {
         $this->items[$id]['qty']--; // Giảm số lượng một đơn vị
-        $this->items[$id]['price'] = $this->items[$id]['item']['price']; //* $this->items[$id]['qty']; // Cập nhật giá tiền dựa trên số lượng mới
+        $this->items[$id]['price'] = $this->items[$id]['item']['price']; // Cập nhật giá tiền dựa trên số lượng mới
         $this->totalQty--; // Giảm tổng số lượng một đơn vị
         $this->totalPrice -= $this->items[$id]['item']['price']; // Giảm tổng giá tiền bằng giá tiền của mặt hàng đã giảm
 
@@ -66,7 +66,7 @@ class Cart extends Model
             unset($this->items[$id]); // Xóa phần tử nếu số lượng <= 0
         }
     }
-    // xóa nhiều
+    // xóa 1 item 
     public function removeItem($id)
     {
         $this->totalQty -= $this->items[$id]['qty']; // Giảm tổng số lượng bằng số lượng của mặt hàng sẽ bị xóa
