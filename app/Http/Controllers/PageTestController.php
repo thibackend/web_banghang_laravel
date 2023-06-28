@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Slide;
+
+use App\Models\Bill;
+use App\Models\BillDetail;
+use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProductType;
-use App\Models\BillDetail;
-use App\Models\Customer;
-use App\Models\Cart;
-use App\Models\Bill;
+use App\Models\Slide;
 use App\Models\Wishlist;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-
-class PageController extends Controller
+use Illuminate\Support\Facades\Session;
+use Faker\Factory as Faker;
+class PageTestController extends Controller
 {
     public function getIndex(){
         $slide = Slide::all();
@@ -21,6 +22,7 @@ class PageController extends Controller
         return view('page.trangchu',compact('slide','new_product','sanpham_khuyenmai'));
         
     }
+
     public function getLoaiSP($type){
         $sp_theoloai = Product::where('id_type',$type)->get();
         $sp_khac = Product::where('id_type','<>',$type)->paginate(3);
@@ -177,7 +179,7 @@ class PageController extends Controller
 
 	public function postCheckout(Request $req){
 		$cart = Session::get('cart');
-		$customer = new Customer;
+		$customer = new Customer();
 		$customer->name = $req->full_name;
 		$customer->gender = $req->gender;
 		$customer->email = $req->email;
@@ -192,7 +194,7 @@ class PageController extends Controller
 
 		$customer->save();
 
-		$bill = new Bill;
+		$bill = new Bill();
 		$bill->id_customer = $customer->id;
 		$bill->date_order = date('Y-m-d');
 		$bill->total = $cart->totalPrice;
@@ -225,6 +227,7 @@ class PageController extends Controller
     //-----------------------------------Cổng Thanh Toán VNPAY--------------------------------------//
 
     public function vnp_payment(){
+        $fakerBill = Faker::create();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         /*
         * To change this license header, choose License Headers in Project Properties.
@@ -240,8 +243,8 @@ class PageController extends Controller
         //Expire
         $startTime = date("YmdHis");
         $expire = date('YmdHis',strtotime('+15 minutes',strtotime($startTime)));
-
-        $vnp_TxnRef = '1256'; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $arr =['12312343','36453323','4324325','2342525856','667565345'];
+        $vnp_TxnRef = $fakerBill->randomElement($arr); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = 'Thanh toán đơn hàng test';
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = 200000 * 100;
@@ -307,7 +310,6 @@ class PageController extends Controller
         if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
             $inputData['vnp_Bill_State'] = $vnp_Bill_State;
         }
-
         //var_dump($inputData);
         ksort($inputData);
         $query = "";
@@ -322,7 +324,6 @@ class PageController extends Controller
             }
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
-
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
@@ -337,5 +338,4 @@ class PageController extends Controller
             }
 
     }
-    
 }

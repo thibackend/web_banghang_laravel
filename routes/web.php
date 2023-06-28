@@ -13,35 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('page',[\App\Http\Controllers\PageTestController::class,'getIndex']
+);
 
-Route::get('page',[App\http\Controllers\PageController::class,'getIndex']);
+Route::get('',[App\http\Controllers\PageController::class,'getIndex']);
 
-Route::get('loaisanpham/{type}',[App\http\Controllers\PageController::class,'getLoaiSP']);
+Route::get('loaisanpham/{type}',[\App\Http\Controllers\PageTestController::class,'getLoaiSP']);
 
-Route::get('chitietsanpham',[App\http\Controllers\PageController::class,'getDetail']);
+Route::get('chitietsanpham',[\App\Http\Controllers\PageTestController::class,'getDetail']);
 
-Route::get('lienhe',[App\http\Controllers\PageController::class,'getContact']);
+Route::get('lienhe',[\App\Http\Controllers\PageTestController::class,'getContact']);
 
-Route::get('gioithieu',[App\http\Controllers\PageController::class,'getAbout']);
+Route::get('gioithieu',[\App\Http\Controllers\PageTestController::class,'getAbout']);
 
 // Admin
 
-Route::get('admin', [App\Http\Controllers\PageController::class, 'getIndexAdmin']);
+Route::get('admin', [\App\Http\Controllers\PageTestController::class, 'getIndexAdmin']);
 
-Route::get('admin-add-form', [App\Http\Controllers\PageController::class, 'getAdminAdd'])->name('add-product');
+Route::get('admin-add-form', [\App\Http\Controllers\PageTestController::class, 'getAdminAdd'])->name('add-product');
 
-Route::post('admin-add-form', [App\Http\Controllers\PageController::class, 'postAdminAdd']);	
+Route::post('admin-add-form', [\App\Http\Controllers\PageTestController::class, 'postAdminAdd']);	
 
-Route::get('admin-edit-form/{id}', [App\Http\Controllers\PageController::class, 'getAdminEdit']);
+Route::get('admin-edit-form/{id}', [\App\Http\Controllers\PageTestController::class, 'getAdminEdit']);
 
-Route::post('admin-edit', [App\Http\Controllers\PageController::class, 'postAdminEdit']);	
+Route::post('admin-edit', [\App\Http\Controllers\PageTestController::class, 'postAdminEdit']);	
 
-Route::post('admin-delete/{id}', [App\Http\Controllers\PageController::class, 'postAdminDelete']);	
+Route::post('admin-delete/{id}', [\App\Http\Controllers\PageTestController::class, 'postAdminDelete']);	
 
-Route::get('admin-export', [App\Http\Controllers\PageController::class, 'exportAdminProduct'])->name('export');
+Route::get('admin-export', [\App\Http\Controllers\PageTestController::class, 'exportAdminProduct'])->name('export');
 
 // Regester
 Route::get('/register', function () {		
@@ -75,13 +74,13 @@ Route::get('/register',function(){
 Route::post('/register',[App\Http\Controllers\UserController::class,'Register']);
 
 //------------------------------------CART--------------------------------------------------------//
-Route::get('add-to-cart/{id}',[App\Http\Controllers\PageController::class,'getAddToCart'])->name('themgiohang');
-Route::get('del-cart/{id}',[App\Http\Controllers\PageController::class,'getDelItemCart'])->name('xoagiohang');
+Route::get('add-to-cart/{id}',[\App\Http\Controllers\PageTestController::class,'getAddToCart'])->name('themgiohang');
+Route::get('del-cart/{id}',[\App\Http\Controllers\PageTestController::class,'getDelItemCart'])->name('xoagiohang');
 
 //-------------------------------------CHECKOUT----------------------------------------------------//
-Route::get('check-out',[App\Http\Controllers\PageController::class,'getCheckout'])->name('dathang');
-Route::post('check-out',[App\Http\Controllers\PageController::class,'postCheckout'])->name('dathang');
+Route::get('check-out',[\App\Http\Controllers\PageTestController::class,'getCheckout'])->name('dathang');
+Route::post('check-out',[\App\Http\Controllers\PageTestController::class,'postCheckout'])->name('dathang');
 
 //------------------------------Cổng thanh toán VNPAY-----------------------------------------------//
-Route::post('/vnp_payment',[App\Http\Controllers\PageController::class,'vnp_payment']);
+Route::post('/vnp_payment',[\App\Http\Controllers\PageTestController::class,'vnp_payment']);
 
